@@ -54,11 +54,11 @@
                 <!-- PROFILE PICTURE -->
                 <div class="profile-pic full-width">
                     <h3>PROFILE PHOTO</h3>
-                    <label class="required-label">Profile Image </label>
+                    <label class="required-label">Profile Image </label><br>
 
                     <div class="drop-zone">
                         <label for="file-upload" class="drop-zone-content">
-                            <img src="icon-placeholder.png" alt="icon"> <p><strong>Choose a file</strong> or drag it here</p>
+                            <img class="img-icn" src="img_icon.png" alt="icon"> <p><strong>Choose a file</strong> or drag it here</p>
                             <span>JPG, PNG, GIF, WEBP accepted</span>
                         </label>
                         <input type="file" id="file-upload" accept="image/*" hidden>
@@ -70,12 +70,13 @@
                     <h3>RECORD MANAGEMENT</h3>
                     <p>LOOK UP BY STUDENT ID</p>
                     <input type="text" id="search" name="search" placeholder="Enter Student ID (e.g. 2024-00123)">
-                    <button id="searchBtn" type="button">Search</button>
-                    <button id="updBtn" type="button">Update</button>
-                    <button id="delBtn" type="button">Delete</button>
+                    <div class="buttons">
+                        <button id="searchBtn">Search</button>
+                        <button id="updBtn">Update</button>
+                        <button id="delBtn">Delete</button>
+                    </div>
                 </div>
             </form>
        </div>
-
     </body>
 </html>

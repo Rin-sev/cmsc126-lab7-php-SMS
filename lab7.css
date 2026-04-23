@@ -56,36 +56,69 @@ body {
     flex: 1 1 100%;        /* Forces the item to take up 100% width */
 }
 
-/*
-.personal-info, .acad-info, .profile-pic, .records {
+.drop-zone {
+    /* width, color, style */
+    border: 2px dashed #ccc; 
+    
+    /* Extra styling to make it look like the reference */
+    padding: 30px;
+    border-radius: 8px;      /* Rounds the corners slightly */
+    background-color: #fff;  /* Keeps the inside white */
+    text-align: center;
+    transition: 0.3s;        /* Makes the hover effect smooth */
+}
+
+/* Optional: change color when you hover over it */
+.drop-zone:hover {
+    border-color: #183c60;   /* Changes to your header color */
+    background-color: #f0f4f8;
+}
+
+.drop-zone img {
+    width: 60px;           /* Adjust this number until it looks right */
+    height: auto;          /* Maintains the aspect ratio */
+    margin-bottom: 15px;   /* Adds space between the icon and the text */
+    opacity: 0.8;          /* Optional: makes it look a bit more like a UI element */
+}
+
+/* Ensure the container is centering the massive icon */
+.drop-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
     width: 100%;
-    max-width: 400px;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}*/
+}
 
-button {
-    background: #4a90e2;
-    color: white;
-    border: none;
+.buttons button {
+    display: flex;
     padding: 10px 15px;
-    margin: 10px 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
     border-radius: 6px;
-    cursor: pointer;
+    
+    background-color: white;
     font-size: 14px;
+    width: 100px;
+    height: 40px;
+   
     transition: 0.3s;
+    cursor: pointer;
 }
 
-button:hover {
-     background: #357abd;
-}
-
-#buttonDT {
-    display: block;
-    margin: 10px auto;
-}
+/* Color coding only */
+#searchBtn { color: #4a90e2; border-color: #4a90e2; }
+#updBtn    { color: #0e4b0a; border-color: #0e4b0a; }
+#delBtn    { color: #640404; border-color: #640404; }
 
 label {
     font-weight: bold;
@@ -104,10 +137,6 @@ input[type="text"], select {
     box-sizing: border-box;
 }
 
-#submitBtn {
-    width: 100%;
-}
-
 h3 {
     text-align: center;
     margin-top: 30px;
@@ -121,11 +150,6 @@ h3 {
     width: 300px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
-
-#searchBtn {
-    display: block;
-    margin: 10px auto;
 }
 
 #result {
