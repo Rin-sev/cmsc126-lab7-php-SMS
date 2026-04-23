@@ -21,7 +21,7 @@
     $conn->select_db ("student_db");
 
     $sql_info = "CREATE TABLE IF NOT EXISTS Student_info (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        id VARCHAR(20) PRIMARY KEY,
         name VARCHAR(40) NOT NULL,
         age int(2) NOT NULL,
         email VARCHAR(40) UNIQUE NOT NULL,
@@ -36,7 +36,7 @@
 
     $sql_prog = "CREATE TABLE IF NOT EXISTS Student_program(
         program_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        student_id INT(6) UNSIGNED,
+        student_id VARCHAR(20),
         course VARCHAR(40) NOT NULL,
         year_level INT(1) NOT NULL,
         graduation_status BOOLEAN,
