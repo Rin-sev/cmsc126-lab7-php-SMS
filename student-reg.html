@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Student Registry</title>
-        <link rel="stylesheet" href="lab7">
+        <link rel="stylesheet" href="lab7.css">
     </head>
 
     <body>
@@ -12,29 +12,21 @@
         </div>
         
         <!-- STUDENT INFORMATION -->
-       <div id="main-body">
+       <div class="container">
             <form id="studentRegistry">
-
+            
                 <!-- PERSONAL INFORMATION -->
                 <div class="personal-info">
                     <h3>PERSONAL INFORATION</h3>
-                    <div class="row">
-                        <div class="name">
-                            <label for="sName">Name *</label>
-                            <input type="text" id="sname" name="sname" placeholder="Juan Dela Cruz">
-                        </div>
+                        <label for="sName">Name *</label><br>
+                        <input type="text" id="sname" name="sname" placeholder="Juan Dela Cruz"><br>
 
-                        <div class="age">
-                            <label for="sAge">Age *</label>
-                            <input type="text" id="sage" name="sage" placeholder="0-99">
-                        </div>
-                    </div>
+                        <label for="sAge">Age *</label><br>
+                        <input type="text" id="sage" name="sage" placeholder="0-99"><br>
 
-                    <div class="email">
-                        <label for="sEmail">Name *</label>
-                        <input type="text" id="semail" name="semail" placeholder="e.g. jdcruz@up.edu.ph">
-                        <p>Must be a valid email address (max 40 chars).</p>                        
-                    </div>
+                        <label for="sEmail">Name *</label><br>
+                        <input type="text" id="semail" name="semail" placeholder="e.g. jdcruz@up.edu.ph"><br>
+                        <p>Must be a valid email address (max 40 chars).</p> 
                 </div>
 
                 <!-- ACADEMIC INFORMATION -->
@@ -60,7 +52,7 @@
                 </div>
 
                 <!-- PROFILE PICTURE -->
-                <div class="profile-pic-section">
+                <div class="profile-pic">
                     <h3>PROFILE PHOTO</h3>
                     <label>Profile Image *</label>
 
@@ -74,7 +66,7 @@
                 </div>
 
                 <!-- RECORDS -->
-                <div class="record-management">
+                <div class="records">
                     <h3>RECORD MANAGEMENT</h3>
                     <p>LOOK UP BY STUDENT ID</p>
                     <input type="text" id="search" name="search" placeholder="Enter Student ID (e.g. 2024-00123)">
