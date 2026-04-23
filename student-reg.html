@@ -11,5 +11,79 @@
             <h2>All fields marked with * are required</h2>
         </div>
         
+        <!-- STUDENT INFORMATION -->
+       <div id="main-body">
+            <form id="studentRegistry">
+
+                <!-- PERSONAL INFORMATION -->
+                <div class="personal-info">
+                    <h3>PERSONAL INFORATION</h3>
+                    <div class="row">
+                        <div class="name">
+                            <label for="sName">Name *</label>
+                            <input type="text" id="sname" name="sname" placeholder="Juan Dela Cruz">
+                        </div>
+
+                        <div class="age">
+                            <label for="sAge">Age *</label>
+                            <input type="text" id="sage" name="sage" placeholder="0-99">
+                        </div>
+                    </div>
+
+                    <div class="email">
+                        <label for="sEmail">Name *</label>
+                        <input type="text" id="semail" name="semail" placeholder="e.g. jdcruz@up.edu.ph">
+                        <p>Must be a valid email address (max 40 chars).</p>                        
+                    </div>
+                </div>
+
+                <!-- ACADEMIC INFORMATION -->
+                <div class="acad-info">
+                    <h3>ACADEMIC INFORATION</h3>
+                    <div class="row">
+                        <div class="course">
+                            <label for="sCourse">Course *</label>
+                            <input type="text" id="scourse" name="scourse" placeholder="e.g. BS Computer Science"> 
+                        </div> 
+                        
+                        <div class="level">
+                            <label for="sLevel">Year Level *</label>
+                            <select name="yearLevel" id="yearLevel">
+                                <option value="first">First Year</option>
+                                <option value="second">Second Year</option>
+                                <option value="third">Third Year</option>
+                                <option value="fourth">Fourth Year</option>
+                                <option value="nth">Nth Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROFILE PICTURE -->
+                <div class="profile-pic-section">
+                    <h3>PROFILE PHOTO</h3>
+                    <label>Profile Image *</label>
+
+                    <div class="drop-zone">
+                        <label for="file-upload" class="drop-zone-content">
+                            <img src="icon-placeholder.png" alt="icon"> <p><strong>Choose a file</strong> or drag it here</p>
+                            <span>JPG, PNG, GIF, WEBP accepted</span>
+                        </label>
+                        <input type="file" id="file-upload" accept="image/*" hidden>
+                    </div>
+                </div>
+
+                <!-- RECORDS -->
+                <div class="record-management">
+                    <h3>RECORD MANAGEMENT</h3>
+                    <p>LOOK UP BY STUDENT ID</p>
+                    <input type="text" id="search" name="search" placeholder="Enter Student ID (e.g. 2024-00123)">
+                    <button type="button">Search</button>
+                    <button type="button">Update</button>
+                    <button type="button">Delete</button>
+                </div>
+            </form>
+       </div>
+
     </body>
 </html>
