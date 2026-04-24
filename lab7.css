@@ -156,7 +156,7 @@ input[type="checkbox"] {
     align-items: center;
     justify-content: center;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 20px;
     
     background-color: white;
     font-size: 14px;
@@ -165,21 +165,40 @@ input[type="checkbox"] {
    
     transition: 0.3s;
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 #searchBtn { color: #4a90e2; border-color: #4a90e2; }
 #updBtn    { color: #0e4b0a; border-color: #0e4b0a; }
 #delBtn    { color: #640404; border-color: #640404; }
 
+#searchBtn:hover {background-color: #4a90e2; border-color: #4a90e2; color: white; transform: scale(1.05);}
+#updBtn:hover    { background-color: #0e4b0a; border-color: #0e4b0a; color: white; transform: scale(1.05); }
+#delBtn:hover    {background-color: #640404; border-color: #640404; color: white; transform: scale(1.05);}
+
+
 #submitBtn{
     font-weight: bold;
     font-size:large;
     padding: 15px 20px;
     border: 1px solid;
-    border-radius: 6px;
+    border-radius: 20px;
     background-color: #165297;
     color: white;
     cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#submitBtn:hover {
+    font-weight: bold;
+    font-size:large;
+    padding: 15px 20px;
+    border: 1px solid;
+    border-radius: 20px;
+    background-color: #237be0;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 /*===== SEARCH =====*/
