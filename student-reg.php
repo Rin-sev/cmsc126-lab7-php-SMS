@@ -14,12 +14,18 @@ if (isset($_GET['search_id'])) {
 
         if ($res && $res->num_rows > 0) {
             $row = $res->fetch_assoc();
-            $status = $row['graduation_status'] ? "Graduated" : "Enrolled";
+            $status = $row['graduation_status'] ? "Graduating" : "Enrolled";
             $result_html = "
                 <div class='stuNum'>Result for: {$row['id']}</div>
+                <div style='margin: 10px 0;'>
+                    <img src='{$row['image']}' alt='Profile' style='width: 150px; height: 150px; object-fit: cover; border: 1px solid #ccc;'>
+                </div>
                 <strong>Name:</strong> {$row['name']}<br>
+                <strong>Age:</strong> {$row['age']}<br>
+                <strong>Email:</strong> {$row['email']}<br>
                 <strong>Course:</strong> {$row['course']}<br>
-                <strong>Status:</strong> $status
+                <strong>Year Level:</strong> {$row['year_level']}<br>
+                <strong>Graduation Status:</strong> $status
             ";
         } else {
             $result_html = "No student found with ID: $search_id";
@@ -45,7 +51,7 @@ if (isset($_GET['search_id'])) {
         </header>
         
         <div class="container">
-            <form id="studentRegistry" method="POST" action="student_db.php" enctype="multipart/form-data">
+            <form id="studentRegistry" method="POST" action="student_db.php" enctype="multipart/form-data" novalidate onsubmit="return validate_input()">
                 <input type="hidden" name="action" value="insert">
             
                 <div class="personal-info">
@@ -96,8 +102,11 @@ if (isset($_GET['search_id'])) {
 
                     <div class="drop-zone">
                         <label for="file-upload" class="drop-zone-content"> 
-                            <img class="img-icn" src="img_icon.png" alt="icon"> 
-                            <p><span id="choose">Choose a file</span> or drag it here</p>
+                            <img id="placeholder-icon" class="img-icn" src="img_icon.png" alt="icon"> 
+                            
+                            <img id="preview" src="#" alt="Preview" style="display:none; width: 200px; height: 200px; object-fit: contain; margin: 10px auto; border-radius: 8px;">
+                            
+                            <p><span id="choose">Choose a file</span></p>
                             <span id="fileType">JPG, PNG, GIF, WEBP accepted</span>
                         </label>
                         <input type="file" id="file-upload" name="profile_img" accept="image/*" required style="display:none;">

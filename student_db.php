@@ -39,16 +39,25 @@ if ($action === "insert") {
     $level = $_POST["yearLevel"];
     $grad = isset($_POST["grad_status"]) ? 1 : 0;
     $img_path = "uploads/" . $_FILES["profile_img"]["name"];
+
+    $target_dir = "uploads/";
+    $file_name = basename($_FILES["profile_img"]["name"]);
+    $target_file = $target_dir . $file_name;
     
-    $sql1 = "INSERT INTO Student_info (id, name, age, email, image) VALUES ('$id', '$name', '$age', '$email', '$img_path')";
-    $sql2 = "INSERT INTO Student_program (student_id, course, year_level, graduation_status) VALUES ('$id', '$course', '$level', '$grad')";
-    
-    if ($conn->query($sql1) && $conn->query($sql2)) {
-        header("Location: student-reg.php?msg=" . urlencode("Student Registered!"));
+    if (move_uploaded_file($_FILES["profile_img"]["tmp_name"], $target_file)) {
+        $sql1 = "INSERT INTO Student_info (id, name, age, email, image) VALUES ('$id', '$name', '$age', '$email', '$target_file')";
+        $sql2 = "INSERT INTO Student_program (student_id, course, year_level, graduation_status) VALUES ('$id', '$course', '$level', '$grad')";
+        
+        if ($conn->query($sql1) && $conn->query($sql2)) {
+            header("Location: student-reg.php?msg=" . urlencode("Student Registered!"));
+        } else {
+            header("Location: student-reg.php?msg=" . urlencode("DB Error: " . $conn->error));
+        }
     } else {
-        header("Location: student-reg.php?msg=" . urlencode("Error: " . $conn->error));
+        header("Location: student-reg.php?msg=" . urlencode("Upload an image"));
     }
     exit();
+    
 }
 
 // Search
