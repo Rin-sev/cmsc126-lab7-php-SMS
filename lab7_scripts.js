@@ -4,7 +4,8 @@ function validate_input(){
     const name = document.getElementById("sname").value;
     const age = document.getElementById("age").value;
     const email = document.getElementById("email").value;
-    const course = document.getElementById("course").value;
+    const course = document.getElementById("scourse").value;
+    const course = document.getElementById("yearLevel").value;
 
     if (!name || !age || !email || !course) {
         document.getElementById('message').textContent = 'Please fill in all fields.';

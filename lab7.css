@@ -1,3 +1,28 @@
+/*===== GLOBAL FORMATTING =====*/
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 30px;
+    color: #2c3e50;
+}
+
+/*===== HEADER =====*/
 header {
     width: 100%;
     text-align: center;
@@ -14,6 +39,7 @@ header {
     letter-spacing: 1px;
 }
 
+/*===== BODY =====*/
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f4f7fb;
@@ -39,6 +65,7 @@ body {
     margin: 0 auto;   
 }
 
+/*===== SECTIONING =====*/
 .personal-info, .acad-info {
     background: white;
     padding: 25px;
@@ -56,6 +83,7 @@ body {
     flex: 1 1 100%;
 }
 
+/*===== PROFILE IMAGE =====*/
 .drop-zone {
     border: 2px dashed #ccc; 
     
@@ -75,7 +103,8 @@ body {
     width: 60px;           
     height: auto;         
     margin-bottom: 15px;  
-    opacity: 0.8;        
+    opacity: 0.9;  
+    cursor: pointer;      
 }
 
 .drop-zone-content {
@@ -85,6 +114,18 @@ body {
     justify-content: center;
 }
 
+#choose{
+    font-weight: bold;
+    color:#640404;
+    cursor: pointer;
+}
+
+#fileType{
+    font-size: small;
+    color:#555454;
+}
+
+/*===== BUTTONS =====*/
 .buttons {
     display: flex;
     justify-content: center;
@@ -123,31 +164,10 @@ body {
     border-radius: 6px;
     background-color: #165297;
     color: white;
+    cursor: pointer;
 }
 
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-}
-
-input[type="text"], select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    outline: none;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-h3 {
-    text-align: center;
-    margin-top: 30px;
-    color: #2c3e50;
-}
-
+/*===== SEARCH =====*/
 #searchID {
     display: block;
     margin: 10px auto;
