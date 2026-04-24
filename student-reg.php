@@ -18,8 +18,11 @@ if (isset($_GET['search_id'])) {
             $result_html = "
                 <div class='stuNum'>Result for: {$row['id']}</div>
                 <strong>Name:</strong> {$row['name']}<br>
+                <strong>Age:</strong> {$row['age']}<br>
+                <strong>Email:</strong> {$row['email']}<br>
                 <strong>Course:</strong> {$row['course']}<br>
-                <strong>Status:</strong> $status
+                <strong>Year Level:</strong> {$row['year_level']}<br>
+                <strong>Graduation Status:</strong> $status
             ";
         } else {
             $result_html = "No student found with ID: $search_id";
