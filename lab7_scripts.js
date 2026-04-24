@@ -2,12 +2,14 @@
 //==== VALIDATE INPUT FUNCTION ====//
 function validate_input(){
     const name = document.getElementById("sname").value;
-    const age = document.getElementById("age").value;
-    const email = document.getElementById("email").value;
+    const age = document.getElementById("sage").value;      
+    const email = document.getElementById("semail").value;
     const course = document.getElementById("scourse").value;
-    const course = document.getElementById("yearLevel").value;
+    const year_level = document.getElementById("yearLevel").value;
+    const fileInput = document.getElementById("file-upload");
+    const message = document.getElementById("message");
 
-    if (!name || !age || !email || !course) {
+    if (!name || !age || !email || !course || !fileInput.files.length) {
         document.getElementById('message').textContent = 'Please fill in all fields.';
         return false;
     }
@@ -57,6 +59,38 @@ function find_student(){
     `;
 }
 
-//==== CONNECT FORM SUBMIT EVENT (Enter + Button) ====//
-const form = document.getElementById("studentForm");
-form.addEventListener("submit", add_student);
+document.addEventListener("DOMContentLoaded", function() { // to show image preview
+    const fileInput = document.getElementById('file-upload');
+    const fileLabel = document.getElementById('choose');
+    const preview = document.getElementById('preview');
+    const icon = document.getElementById('placeholder-icon');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+
+                fileLabel.textContent = file.name;
+                fileLabel.style.color = "#2e7d32"; 
+                fileLabel.style.fontWeight = "bold";
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (preview) {
+                        preview.src = e.target.result;
+                        preview.style.display = 'block'; 
+                        if (icon) icon.style.display = 'none';
+                    }
+                }
+                reader.readAsDataURL(file);
+                
+            } else {
+                fileLabel.textContent = "Choose a file";
+                fileLabel.style.color = ""; 
+                if (preview) preview.style.display = 'none';
+                if (icon) icon.style.display = 'block';
+            }
+        });
+    }
+});
+

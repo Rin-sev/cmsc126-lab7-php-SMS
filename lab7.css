@@ -65,6 +65,21 @@ body {
     margin: 0 auto;   
 }
 
+/*===== GRADUATION CHECKBOX =====*/
+.grad-label {
+    display: inline; 
+    margin-left: 10px;    
+    vertical-align: middle;
+}
+
+input[type="checkbox"] {
+    width: auto;
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+    transform: scale(1.2); 
+}
+
 /*===== SECTIONING =====*/
 .personal-info, .acad-info {
     background: white;
@@ -188,7 +203,7 @@ body {
 
 #message {
     text-align: center;
-    color: rgb(77, 7, 7);
+    color: rgb(200, 16, 16);
     font-weight: bold;
 }
 
