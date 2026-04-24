@@ -23,8 +23,8 @@ body {
 }
 
 .required-label::after {
-    content: " *";      /* Injects the symbol via CSS */
-    color: #b22222;     /* Styles the symbol */
+    content: " *";
+    color: #b22222;
     font-weight: bold;
 }
 
@@ -44,8 +44,8 @@ body {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    flex: 1;               /* Grow to fill half the space */
-    min-width: 300px;      /* Prevents them from getting too skinny */
+    flex: 1;
+    min-width: 300px;
 }
 
 .full-width {
@@ -53,35 +53,31 @@ body {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    flex: 1 1 100%;        /* Forces the item to take up 100% width */
+    flex: 1 1 100%;
 }
 
 .drop-zone {
-    /* width, color, style */
     border: 2px dashed #ccc; 
     
-    /* Extra styling to make it look like the reference */
     padding: 30px;
-    border-radius: 8px;      /* Rounds the corners slightly */
-    background-color: #fff;  /* Keeps the inside white */
+    border-radius: 8px; 
+    background-color: #fff;
     text-align: center;
-    transition: 0.3s;        /* Makes the hover effect smooth */
+    transition: 0.3s; 
 }
 
-/* Optional: change color when you hover over it */
 .drop-zone:hover {
-    border-color: #183c60;   /* Changes to your header color */
+    border-color: #183c60;
     background-color: #f0f4f8;
 }
 
 .drop-zone img {
-    width: 60px;           /* Adjust this number until it looks right */
-    height: auto;          /* Maintains the aspect ratio */
-    margin-bottom: 15px;   /* Adds space between the icon and the text */
-    opacity: 0.8;          /* Optional: makes it look a bit more like a UI element */
+    width: 60px;           
+    height: auto;         
+    margin-bottom: 15px;  
+    opacity: 0.8;        
 }
 
-/* Ensure the container is centering the massive icon */
 .drop-zone-content {
     display: flex;
     flex-direction: column;
@@ -115,10 +111,19 @@ body {
     cursor: pointer;
 }
 
-/* Color coding only */
 #searchBtn { color: #4a90e2; border-color: #4a90e2; }
 #updBtn    { color: #0e4b0a; border-color: #0e4b0a; }
 #delBtn    { color: #640404; border-color: #640404; }
+
+#submitBtn{
+    font-weight: bold;
+    font-size:large;
+    padding: 15px 20px;
+    border: 1px solid;
+    border-radius: 6px;
+    background-color: #165297;
+    color: white;
+}
 
 label {
     font-weight: bold;
