@@ -33,6 +33,82 @@ if (isset($_GET['search_id'])) {
         $conn->close();
     }
 }
+
+if (isset($_GET['update_id'])) {
+    $update_id = $_GET['update_id'];
+    $conn = new mysqli("localhost", "root", "", "student_db");
+
+    if (!$conn->connect_error) {
+        $update_id_safe = $conn->real_escape_string($update_id);
+        $sql = "SELECT * FROM Student_info 
+                JOIN Student_program ON Student_info.id = Student_program.student_id 
+                WHERE Student_info.id = '$update_id_safe'";
+        $res = $conn->query($sql);
+
+        // ADDED: form for update
+        if ($res && $res->num_rows > 0) {
+            $row = $res->fetch_assoc();
+            $result_html = "
+                <div class='stuNum' style='margin-bottom: 10px;'>Update Record: {$row['id']}</div>
+                <form method='POST' action='student_db.php' style='text-align: left; padding: 15px; border: 1px solid #ccc; border-radius: 5px; background: #fdfdfd;'>
+                    <input type='hidden' name='action' value='update_submit'>
+                    <input type='hidden' name='target_id' value='{$row['id']}'>
+                    
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Name:</label>
+                    <input type='text' name='uname' value='{$row['name']}' required style='width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;'>
+                    
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Age:</label>
+                    <input type='number' name='uage' value='{$row['age']}' required style='width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;'>
+                    
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Email:</label>
+                    <input type='email' name='uemail' value='{$row['email']}' required style='width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;'>
+                    
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Course:</label>
+                    <input type='text' name='ucourse' value='{$row['course']}' required style='width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;'>
+                    
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Year Level:</label>
+                    <select name='uyearLevel' style='width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;'>
+                        <option value='1' ".($row['year_level'] == 1 ? 'selected' : '').">First Year</option>
+                        <option value='2' ".($row['year_level'] == 2 ? 'selected' : '').">Second Year</option>
+                        <option value='3' ".($row['year_level'] == 3 ? 'selected' : '').">Third Year</option>
+                        <option value='4' ".($row['year_level'] == 4 ? 'selected' : '').">Fourth Year</option>
+                    </select>
+
+                    <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Profile Photo:</label>
+                    <div class='drop-zone' onclick='document.getElementById(\"file-upload-update\").click();' style='border: 2px dashed #ccc; padding: 20px; text-align: center; cursor: pointer;'>
+                        <img id='preview-update' src='#' alt='Preview' style='display:none; width: 100px; height: 100px; object-fit: contain; margin: 0 auto 10px; border-radius: 4px;'>
+                        <p id='label-update' style='margin: 0; font-size: 14px; color: #666;'>Click to change photo</p>
+                        <input type='file' id='file-upload-update' name='uprofile_img' accept='image/*' style='display:none;' onchange='previewUpdateImage(this)'>
+                    </div>
+                    <p style='font-size: 11px; color: #888; margin-bottom: 15px;'>Leave empty to keep current photo.</p>
+                    
+                    <button type='submit' style='background: #0056b3; color: white; padding: 10px; border: none; cursor: pointer; width: 100%; border-radius: 4px; font-weight: bold;'>Save Updates</button>
+                </form>
+            ";
+        } else {
+            $result_html = "No student found with ID: " . htmlspecialchars($update_id) . " to update.";
+        }
+        $conn->close();
+    }
+}
+
+if (isset($_GET['update_success'])) {
+    $success_msg = htmlspecialchars($_GET['update_success']);
+    $result_html = "
+        <div style='padding: 20px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px; font-weight: bold;'>
+            $success_msg
+        </div>";
+}
+
+if (isset($_GET['delete_msg'])) {
+    $del_msg = htmlspecialchars($_GET['delete_msg']);
+    
+    $result_html = "
+        <div style='padding: 20px; background-color: #edd4d4; color: #571515; border: 1px solid #c3e6cb; border-radius: 5px; font-weight: bold;'>
+            $del_msg
+        </div>";
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,8 +121,8 @@ if (isset($_GET['search_id'])) {
         <header>
             <h1 id="title">Student Registration</h1>
             <h2>All fields marked with <span style="color: #b22222;">*</span> are required</h2>
-            <?php if($message): ?>
-                <div id="message"><?= htmlspecialchars($message) ?></div>
+            <?php if(isset($_GET['msg'])): ?>
+                <div id="message"><?= htmlspecialchars($_GET['msg']) ?></div>
             <?php endif; ?>
         </header>
         
@@ -114,7 +190,7 @@ if (isset($_GET['search_id'])) {
                 </div>
 
                 <div class="submit">
-                    <button id="submitBtn" type="submit">SUBMIT REGISTRATION</button>
+                    <button id="submitBtn" type="submit">SUBMIT</button>
                  </div>
             </form>
 
@@ -132,16 +208,9 @@ if (isset($_GET['search_id'])) {
                         <button type="submit" id="searchBtn" onclick="document.getElementById('searchVal').value = document.getElementById('search').value;">Search</button>
                     </form>
 
-                    <form method="POST" action="student_db.php" style="display:inline;">
-                        <input type="hidden" name="action" value="update">
-                        <input type="hidden" name="search" id="updateVal">
-                        <input type="hidden" name="sname" id="unameVal">
-                        <input type="hidden" name="scourse" id="ucourseVal">
-                        <button type="submit" id="updBtn" onclick="
-                            document.getElementById('updateVal').value = document.getElementById('search').value;
-                            document.getElementById('unameVal').value = document.getElementById('sname').value;
-                            document.getElementById('ucourseVal').value = document.getElementById('scourse').value;
-                        ">Update</button>
+                    <form method="GET" action="student-reg.php" style="display:inline;">
+                        <input type="hidden" name="update_id" id="updateVal">
+                        <button type="submit" id="updBtn" onclick="document.getElementById('updateVal').value = document.getElementById('search').value;">Update</button>
                     </form>
 
                     <form method="POST" action="student_db.php" style="display:inline;">
