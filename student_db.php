@@ -68,22 +68,47 @@ if ($action === "search") {
 }
 
 // Update
-if ($action === "update") {
-    $id = $_POST["search"];
-    $name = $_POST["sname"];
-    $course = $_POST["scourse"];
-    $conn->query("UPDATE Student_info SET name='$name' WHERE id='$id'");
-    $conn->query("UPDATE Student_program SET course='$course' WHERE student_id='$id'");
-    header("Location: student-reg.php?msg=" . urlencode("Updated successfully!"));
+if ($action === "update_submit") {
+    $id = $conn->real_escape_string($_POST["target_id"]);
+    $name = $conn->real_escape_string($_POST["uname"]);
+    $age = (int)$_POST["uage"];
+    $email = $conn->real_escape_string($_POST["uemail"]);
+    $course = $conn->real_escape_string($_POST["ucourse"]);
+    $level = (int)$_POST["uyearLevel"];
+
+    $sql_info = "UPDATE Student_info SET name='$name', age=$age, email='$email' WHERE id='$id'";
+
+    if (!empty($_FILES["uprofile_img"]["name"])) {
+        $target_dir = "uploads/";
+        $file_name = basename($_FILES["uprofile_img"]["name"]);
+        $target_file = $target_dir . $file_name;
+
+        if (move_uploaded_file($_FILES["uprofile_img"]["tmp_name"], $target_file)) {
+            $sql_info = "UPDATE Student_info SET name='$name', age=$age, email='$email', image='$target_file' WHERE id='$id'";
+        }
+    }
+
+    $conn->query($sql_info);
+    $conn->query("UPDATE Student_program SET course='$course', year_level=$level WHERE student_id='$id'");
+
+    header("Location: student-reg.php?update_success=" . urlencode("Student $id updated successfully!"));
     exit();
 }
 
 // Delete
 if ($action === "delete") {
-    $search_id = $_POST["search"];
+    $search_id = $conn->real_escape_string($_POST["search"]);
+    
     $conn->query("DELETE FROM Student_program WHERE student_id='$search_id'");
     $conn->query("DELETE FROM Student_info WHERE id='$search_id'");
-    header("Location: student-reg.php?msg=" . urlencode("Deleted successfully!"));
+
+    if ($conn->affected_rows > 0) {
+        $msg = "Student $search_id deleted successfully!";
+    } else {
+        $msg = "No student found with ID $search_id.";
+    }
+
+    header("Location: student-reg.php?delete_msg=" . urlencode($msg) . "&status=$status");
     exit();
 }
 
