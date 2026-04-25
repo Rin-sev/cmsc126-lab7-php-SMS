@@ -1,4 +1,3 @@
-
 //==== VALIDATE INPUT FUNCTION ====//
 function validate_input(){
     const name = document.getElementById("sname").value;
@@ -39,26 +38,6 @@ function validate_input(){
     return true;
 }
 
-//==== SEARCH STUDENT FUNCTION ====//
-function find_student(){
-    const searchID = document.getElementById("searchID").value;
-
-    const student = added_students.find(s => s.id === searchID); // search for student by ID
-
-    if (!student) {
-        document.getElementById("result").innerHTML = "Student record does not exist.";
-        return;
-    }
-
-    document.getElementById("result").innerHTML = `
-    <strong>ID:</strong> 2024-${student.id}<br>
-    <strong>Name:</strong> ${student.name}<br>
-    <strong>Age:</strong> ${student.age}<br>
-    <strong>Email:</strong> ${student.email}<br>
-    <strong>Course:</strong> ${student.course}
-    `;
-}
-
 document.addEventListener("DOMContentLoaded", function() { // to show image preview
     const fileInput = document.getElementById('file-upload');
     const fileLabel = document.getElementById('choose');
@@ -94,3 +73,34 @@ document.addEventListener("DOMContentLoaded", function() { // to show image prev
     }
 });
 
+// for maintaining scroll position every reload
+document.addEventListener("click", function(e) {
+    // Check if the clicked element is a submit button or inside a form
+    if (e.target.type === "submit" || e.target.tagName === "BUTTON") {
+        localStorage.setItem("scrollPosition", window.scrollY);
+    }
+});
+
+window.addEventListener("load", function() {
+    const scrollPos = localStorage.getItem("scrollPosition");
+    if (scrollPos) {
+        window.scrollTo(0, parseInt(scrollPos));
+        localStorage.removeItem("scrollPosition");
+    }
+});
+
+// to handle new image update
+function previewUpdateImage(input) {
+    const preview = document.getElementById('preview-update');
+    const label = document.getElementById('label-update');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            label.innerText = input.files[0].name;
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
