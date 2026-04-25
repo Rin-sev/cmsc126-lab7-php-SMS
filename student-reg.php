@@ -45,14 +45,13 @@ if (isset($_GET['update_id'])) {
                 WHERE Student_info.id = '$update_id_safe'";
         $res = $conn->query($sql);
 
-        // ADDED: form for update
+        // FIXED FR
         if ($res && $res->num_rows > 0) {
             $row = $res->fetch_assoc();
             $result_html = "
                 <div class='stuNum' style='margin-bottom: 10px;'>Update Record: {$row['id']}</div>
                 <form method='POST' action='student_db.php' enctype='multipart/form-data' style='text-align: left; padding: 15px; border: 1px solid #ccc; border-radius: 5px; background: #fdfdfd;'>
                     <input type='hidden' name='action' value='update_submit'>
-                    <input type='hidden' name='target_id' value='{$row['id']}'>                    <input type='hidden' name='action' value='update_submit'>
                     <input type='hidden' name='target_id' value='{$row['id']}'>
                     
                     <label style='display:block; margin-bottom: 5px; font-weight: bold;'>Name:</label>
