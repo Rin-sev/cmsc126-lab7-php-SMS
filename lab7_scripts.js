@@ -1,5 +1,6 @@
 //==== VALIDATE INPUT FUNCTION ====//
 function validate_input(){
+    const sid = document.getElementsByName("sid")[0].value;
     const name = document.getElementById("sname").value;
     const age = document.getElementById("sage").value;      
     const email = document.getElementById("semail").value;
@@ -8,7 +9,7 @@ function validate_input(){
     const fileInput = document.getElementById("file-upload");
     const message = document.getElementById("message");
 
-    if (!name || !age || !email || !course || !fileInput.files.length) {
+    if (!sid || !name || !age || !email || !course || !fileInput.files.length) {
         document.getElementById('message').textContent = 'Please fill in all fields.';
         return false;
     }
@@ -31,7 +32,14 @@ function validate_input(){
 
     const student_email = /^[^\s@]+@up\.edu\.ph$/;
     if (!student_email.test(email)) {
-        document.getElementById('message').textContent = 'Please enter a valid email address.';
+        document.getElementById('message').textContent = 'Please enter your UP mail.';
+        return false;
+    }
+
+    const idPattern = /^\d{4}-\d{5}$/; // should be 4 digits, hyphen, and 5 digits number
+
+    if (!idPattern.test(sid)) {
+        document.getElementById('message').textContent = 'Invalid student ID format (e.g., 2026-12345).';
         return false;
     }
 
